@@ -35,7 +35,7 @@ app.use(cors())
 app.use('/users', usersRouter);
 app.use('/fblogin', fbloginRouter)
 app.use('/googlelogin', googleloginRouter)
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 // app.use('/users', usersRouter)
 app.use('/nasa', nasa)
 

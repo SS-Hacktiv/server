@@ -2,19 +2,32 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
+require('dotenv').config()
+const cors = require('cors')
 
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const fbloginRouter = require('./routes/fblogin')
+const googleloginRouter = require('./routes/googlelogin')
 
 var app = express();
 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/ss-hacktiv');
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('connected database')
+});
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors())
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/fblogin', fbloginRouter)
+app.use('/googlelogin', googleloginRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

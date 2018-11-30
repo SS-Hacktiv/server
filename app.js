@@ -8,6 +8,7 @@ const cors = require('cors')
 var usersRouter = require('./routes/users');
 const fbloginRouter = require('./routes/fblogin')
 const googleloginRouter = require('./routes/googlelogin')
+const nasa = require('./routes/nasa')
 
 var app = express();
 
@@ -16,10 +17,11 @@ mongoose.connect('mongodb://localhost/ss-hacktiv');
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
+db.once('open', function () {
   console.log('connected database')
 });
 
+app.use(cors())
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,6 +30,10 @@ app.use(cors())
 app.use('/users', usersRouter);
 app.use('/fblogin', fbloginRouter)
 app.use('/googlelogin', googleloginRouter)
+app.use('/', indexRouter);
+// app.use('/users', usersRouter)
+app.use('/nasa', nasa)
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

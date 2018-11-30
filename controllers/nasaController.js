@@ -28,7 +28,8 @@ module.exports = {
             url: 'https://api.nasa.gov/planetary/apod'
         }
         request(options, ((error, response, body) => {
-
+            console.log(error)
+            console.log(response)
             if (!error && response.statusCode == 200) {
                 res.status(200).json(body)
             } else {

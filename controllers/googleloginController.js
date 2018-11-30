@@ -21,7 +21,7 @@ module.exports = {
                     User.create({
                         email: req.body.email,
                         name: req.body.name,
-                        password: req.body.password
+                        password: req.body.password || 'google'
                     }, (err, data) => {
                         if(err) {
                             res.status(400).json({
@@ -29,7 +29,7 @@ module.exports = {
                             })
                         } else {
                             res.status(400).json({
-                                token: jwtHelper.password(req.body),
+                                token: jwtHelper.generate(req.body),
                                 name: req.body.name,
                                 email: req.body.email
                             })

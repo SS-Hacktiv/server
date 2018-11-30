@@ -2,20 +2,18 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
-<<<<<<< HEAD
 require('dotenv').config()
-=======
->>>>>>> Initial commit of dictionary
 const cors = require('cors')
 
 var usersRouter = require('./routes/users');
-<<<<<<< HEAD
+
 const fbloginRouter = require('./routes/fblogin')
 const googleloginRouter = require('./routes/googlelogin')
 const nasa = require('./routes/nasa')
-=======
 const dictionaryRoute = require('./routes/dictionary')
->>>>>>> Initial commit of dictionary
+
+var hubblesRouter = require('./routes/hubbles')
+
 
 var app = express();
 
@@ -35,16 +33,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cors())
 
 app.use('/users', usersRouter);
-<<<<<<< HEAD
 app.use('/fblogin', fbloginRouter)
 app.use('/googlelogin', googleloginRouter)
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 // app.use('/users', usersRouter)
 app.use('/nasa', nasa)
 
-=======
 app.use('/dictionary', dictionaryRoute)
->>>>>>> Initial commit of dictionary
+app.use('/hubble', hubblesRouter)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
